@@ -4,9 +4,9 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
-COPY . .
-
 RUN pip3 install -r requirements.txt
+
+COPY index.html /usr/local/lib/python3.9/site-packages/streamlit/static/index.html
 
 EXPOSE 8501
 
