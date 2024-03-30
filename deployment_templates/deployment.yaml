@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: bug-reporter
+  name: bug-reporter
+  namespace: your-namespace # Change to your namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: bug-reporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: bug-reporter
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: bug-reporter
+        image: joyzoursky/ai-bug-report-generator:latest # Select a specific image version
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8501
+        resources:
+          requests:
+            cpu: "32m"
+            memory: "32Mi"
+          limits:
+            cpu: "200m"
+            memory: "128Mi"
+        env:
+        - name: "GOOGLE_API_KEY"
+          valueFrom:
+            secretKeyRef:
+              name: "bug-reporter-secret"
+              key: "GOOGLE_API_KEY"
+        - name: "PINECONE_API_KEY"
+          valueFrom:
+            secretKeyRef:
+              name: "bug-reporter-secret"
+              key: "PINECONE_API_KEY"
+        - name: "PINECONE_ENVIRONMENT"
+          valueFrom:
+            secretKeyRef:
+              name: "bug-reporter-secret"
+              key: "PINECONE_ENVIRONMENT"
