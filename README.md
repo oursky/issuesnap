@@ -1,0 +1,1 @@
+# AI Bug Report Generator
