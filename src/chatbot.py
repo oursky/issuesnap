@@ -33,6 +33,7 @@ st.set_page_config(
 )
 st.title("AI Bug Report Generator")
 
+
 with st.chat_message("assistant"):
     st.markdown("Good day buddy! Tell me something about your bug 🐞")
 
@@ -59,16 +60,14 @@ if user_steps:
 footer = """
             <style>
                 .footer {
-                position: fixed;
-                left: 10px;
-                bottom: 0;
+                position: relative;
                 width: 100%;
                 color: #888;
-                text-align: center;
-                font-size: 14px;
+                text-align: right;
+                font-size: 10px;
                 font-weight: 400;
                 }
             </style>
-            <div class="footer">© Oursky Ltd.</div>
+            <div class="footer">Made with Passion © Oursky Ltd.</div>
     """
 st.markdown(footer,unsafe_allow_html=True)
