@@ -55,3 +55,20 @@ if user_steps:
             st.markdown(display_expected_results)
 
         generate_bug_report(user_steps, expected_results)
+
+footer = """
+            <style>
+                .footer {
+                position: fixed;
+                left: 10px;
+                bottom: 0;
+                width: 100%;
+                color: #888;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 400;
+                }
+            </style>
+            <div class="footer">© Oursky Ltd.</div>
+    """
+st.markdown(footer,unsafe_allow_html=True)

@@ -60,9 +60,6 @@ def process_user_input(user_steps, expected_results):
   ```
   """
         response.content += f"\nHappy Testing!🌟"
-
-        print(prompt)
-
         return response.content
     else:
         # Send a general prompt if no similar issue is found
@@ -70,7 +67,4 @@ def process_user_input(user_steps, expected_results):
         prompt += "Can you generate a detailed bug report describing the issue and potential solutions?"
 
         response = llm.invoke(prompt)
-
-        print(prompt)
-
         return response.content
