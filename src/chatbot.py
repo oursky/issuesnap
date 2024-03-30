@@ -25,7 +25,14 @@ def generate_bug_report(user_steps, expected_results):
 
 
 # Streamlit App Interface
+st.set_page_config(
+    page_title="AI Bug Report Generator",
+    page_icon="🤖",
+    initial_sidebar_state="collapsed",
+    menu_items=None
+)
 st.title("AI Bug Report Generator")
+
 with st.chat_message("assistant"):
     st.markdown("Good day buddy! Tell me something about your bug 🐞")
 
