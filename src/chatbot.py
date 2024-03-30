@@ -1,76 +1,33 @@
-import os
-from dotenv import load_dotenv
 import streamlit as st
-from langchain_google_genai import (
-    ChatGoogleGenerativeAI,
-    HarmBlockThreshold,
-    HarmCategory,
-)
-
-# Configuration (Load environment variables)
-load_dotenv()
-google_api_key = os.getenv("GOOGLE_API_KEY")
-
-# Initialize LLM model
-llm = ChatGoogleGenerativeAI(
-    model="gemini-pro",
-    safety_settings={
-        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-    },
-)
-
+from generate_bug_report import process_user_input
 
 def get_user_steps():
-    return st.text_area("What are your steps to reproduce the issue?",
-                        placeholder="Example:\n1. Click Login button\n2. Fill in email\n3. Click Submit button\n4. See an error \"Failed to login\"",
+    return st.text_area("**How do you reproduce the bug?**",
+                        placeholder="e.g.\n1. Click Login button\n2. Fill in email and OTP\n3. Click Submit button\n4. See an error \"Failed to login\"",
                         value="",
-                        height=200)
+                        height=150)
 
 
 def get_expected_results():
-    return st.text_area("What are your expected results?",
-                        placeholder="Example: Should be able to login and redirect to Home page successfully.",
+    return st.text_area("**What do you expect to see?**",
+                        placeholder="e.g. Should redirect to Home page.",
                         value="",
                         height=100)
 
 # Process User Input Function
-def generate_bug_report(query):
+def generate_bug_report(user_steps, expected_results):
     """Processes the user's query, generates a response, and updates chat history."""
 
     # Display the Assistant's message
     with st.chat_message("assistant"):
-        response = llm.invoke(query)
-        st.markdown(response.content)
-
-    # Store the User's message and Assistant's response
-    st.session_state.messages.append({"role": "user", "content": query})
-    st.session_state.messages.append(
-        {"role": "assistant", "content": response.content})
-
-# Display Chat History Function
-def display_chat_history():
-    """Displays the chat history in a conversational format."""
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+        response = process_user_input(user_steps, expected_results)
+        st.markdown(response)
 
 
 # Streamlit App Interface
 st.title("AI Bug Report Generator")
-
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = [
-        {
-            "role": "assistant",
-            "content": "Good day buddy, I am your bug reporting assistant. Tell me something about your bug."
-        }
-    ]
-
-display_chat_history()  # Show existing messages on app launch
+with st.chat_message("assistant"):
+    st.markdown("Good day buddy! Tell me something about your bug 🐞")
 
 # Get user input for steps
 user_steps = get_user_steps()
@@ -79,7 +36,7 @@ user_steps = get_user_steps()
 if user_steps:
     # Display the User's steps
     with st.chat_message("user"):
-        display_user_steps = "Steps to reproduce:\n" + user_steps
+        display_user_steps = "Steps to reproduce:\n\n" + user_steps
         st.markdown(display_user_steps)
 
     # Get user input for steps
@@ -87,9 +44,7 @@ if user_steps:
     if expected_results:
         # Display the User's steps
         with st.chat_message("user"):
-            display_expected_results = "Expected results:\n" + expected_results
+            display_expected_results = "Expected results:\n\n" + expected_results
             st.markdown(display_expected_results)
 
-        input_prompt = user_steps + expected_results
-
-        generate_bug_report(input_prompt)
+        generate_bug_report(user_steps, expected_results)
