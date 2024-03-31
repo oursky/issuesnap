@@ -44,10 +44,13 @@ Below are some examples of bug report:
         for sample in samples:
             prompt += f"{sample}"
 
-        # Generate bug report using LLM
+        # Generate custom bug report using LLM
         response = llm.invoke(prompt)
-        response.content += f"\nDon’t forget to include your test environment details, as well as any screenshots or screen recordings, when submitting your issue.🚀\n"
-        response.content += """
+        
+        report = f"\n*Cool Tip💡 If the result is not accurate, try to refine your input with more information.*\n"
+        report += response.content
+        report += f"\nDon’t forget to include your test environment details, as well as any screenshots or screen recordings, when submitting your issue.🚀\n"
+        report += """
 Below is a template for test environment information:
 ```
 ## Environment:
@@ -59,12 +62,17 @@ Below is a template for test environment information:
 - Test account: 
 ```
   """
-        response.content += f"\nHappy Testing!🌟"
-        return response.content
+        report += f"\nHappy Testing!🌟"
+        return report
     else:
         # Send a general prompt if no similar issue is found
         prompt = f"The user reported encountering a bug. Steps to reproduce:\n{user_steps}\nExpected Results:\n{expected_results}\n"
         prompt += "Can you generate a detailed bug report describing the issue and potential solutions?"
 
+         # Generate general bug report using LLM
         response = llm.invoke(prompt)
-        return response.content
+        
+        report = f"\n*Cool Tip💡 If the result is not accurate, try to refine your input with more information.*\n\n"
+        report += response.content
+
+        return report
