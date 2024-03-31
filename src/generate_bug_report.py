@@ -22,7 +22,6 @@ llm = ChatGoogleGenerativeAI(
     },
 )
 
-
 def process_user_input(user_steps, expected_results):
 
     samples = find_closest_samples(user_steps, expected_results)
@@ -30,16 +29,17 @@ def process_user_input(user_steps, expected_results):
     # Send custom prompt if similar issue is found
     if len(samples) > 0:
 
-        prompt = """You are a software QA tester. By given steps to reproduce and expected behaviours of a bug issue, you return write a good issue title and description for the issue to report. Use simple and short sentences. Use similar format and punctuations. Wrap your result in code snippet.
+        prompt = """You are a software QA tester. The user reported encountering a bug.
+Steps to reproduce:
+{user_steps}
+Expected Results:
+{expected_results}.
 
-  Given steps to reproduce:
-  {user_steps}
+Taking reference of the examples below, can you generate a bug report describting the issue, steps to reproduce and expected results?
+Use simple and short sentences. Use similar format and punctuations. Wrap your result in code snippet.
 
-  Given expected behaviours:
-  {expected_results}
-
-  Below are some examples of bug report:
-  """.format(user_steps=user_steps, expected_results=expected_results)
+Below are some examples of bug report:
+""".format(user_steps=user_steps, expected_results=expected_results)
 
         for sample in samples:
             prompt += f"{sample}"
@@ -48,16 +48,16 @@ def process_user_input(user_steps, expected_results):
         response = llm.invoke(prompt)
         response.content += f"\nDon’t forget to include your test environment details, as well as any screenshots or screen recordings, when submitting your issue.🚀\n"
         response.content += """
-  Below is a template for test environment information:
-  ```
-  ## Environment:
-  - Environment: UAT
-  - Platform: 
-  - Build version: 
-  - Browser: 
-  - Device (OS version): 
-  - Test account: 
-  ```
+Below is a template for test environment information:
+```
+## Environment:
+- Environment: UAT
+- Platform: 
+- Build version: 
+- Browser: 
+- Device (OS version): 
+- Test account: 
+```
   """
         response.content += f"\nHappy Testing!🌟"
         return response.content
