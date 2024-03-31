@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/tls-acme: 'true'
 spec:
   rules:
-    - host: bugreport.example.com # Change to your domain
+    - host: bugreport.oursky.com # Change to your domain
       http:
         paths:
           - path: /
@@ -21,5 +21,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - bugreport.example.com # Change to your domain
+        - bugreport.oursky.com # Change to your domain
       secretName: bugreport-tls
