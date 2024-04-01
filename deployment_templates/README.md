@@ -3,6 +3,12 @@
 - `service.yaml` - Tell your system how to find and connect to different running instances of your application
 - `ingress.yaml` - Set up an entry point for users to access your application from outside the system
 
+```
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl apply -f secret.yaml
+```
+
 ## How to create environment variables in secret
 
 1. Prepare your environment variables in file `.env`
@@ -12,6 +18,8 @@
   GOOGLE_API_KEY=your-google-api-key
   PINECONE_API_KEY=your-pinecone-api-key
   PINECONE_ENVIRONMENT=your-pinecone-env
+  PINECONE_INDEX_NAME=your-index-name
+  PINECONE_INDEX_DIMENSION=your-index-dimension
   ```
 
 2. Create the secret in kubernetes

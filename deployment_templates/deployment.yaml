@@ -40,8 +40,13 @@ spec:
             secretKeyRef:
               name: "bug-reporter-secret"
               key: "PINECONE_API_KEY"
-        - name: "PINECONE_ENVIRONMENT"
+        - name: "PINECONE_INDEX_NAME"
           valueFrom:
             secretKeyRef:
               name: "bug-reporter-secret"
-              key: "PINECONE_ENVIRONMENT"
+              key: "PINECONE_INDEX_NAME"
+        - name: "PINECONE_INDEX_DIMENSION"
+          valueFrom:
+            secretKeyRef:
+              name: "bug-reporter-secret"
+              key: "PINECONE_INDEX_DIMENSION"
