@@ -12,3 +12,6 @@ __pycache__/
 
 # Deployment files
 deploy/
+
+# Source of csv data
+csv/
