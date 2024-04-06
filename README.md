@@ -9,7 +9,6 @@ This project requires the following Python libraries:
 - streamlit
 - langchain-google-genai
 - pinecone-client
-- scikit-learn
 
 ## Project Structure
 
@@ -17,7 +16,8 @@ The project consists of three main Python scripts:
 
 * **chatbot.py:** This script handles the Streamlit user interface and interacts with other scripts to process user input and generate bug reports.
 * **generate_bug_report.py:** This script defines the core logic for processing user input, querying Pinecone for similar issues, and using the LLM to create the bug report.
-* **vectorizer.py:** This script handles vectorizing user input for searching similar issues within Pinecone.
+* **closest_sample_finder.py:** This script handles vectorizing user input for searching similar issues within Pinecone.
+* **upsert_csv_to_pinecone.py:** This script handles vectorizing source data for upserting to Pinecone database.
 
 ## Functionality Overview
 
