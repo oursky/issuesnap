@@ -1,5 +1,5 @@
-python-dotenv
-streamlit
-pinecone-client
-langchain-google-genai
-pandas
+python-dotenv==1.0.1
+streamlit==1.32.2
+pinecone-client==3.2.2
+langchain-google-genai==1.0.1
+pandas==2.2.1
