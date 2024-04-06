@@ -67,7 +67,7 @@ Below are some examples of bug report:
             # Generate custom bug report using LLM
             response = llm.invoke(prompt)
             
-            report = f"\n*Cool Tip💡 If the result is not accurate, try to refine your input with more information.*\n"
+            report = f"\n*Cool Tip💡 If the result is not accurate, try to refine your input with more information.*\n\n"
             report += response.content
             report += f"\nDon’t forget to include your test environment details, as well as any screenshots or screen recordings, when submitting your issue.🚀\n"
             report += """
