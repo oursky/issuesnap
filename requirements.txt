@@ -2,3 +2,4 @@ python-dotenv
 streamlit
 pinecone-client
 langchain-google-genai
+pandas
