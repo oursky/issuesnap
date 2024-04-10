@@ -36,6 +36,15 @@ def init_llm():
         logging.error(f"bug_report_generator.py: Error initializing LLM: {e}")
         raise
 
+def split_response(content):
+    try:
+        content_split = content.split("Issue Title:")[1].split("Issue Body:")
+        title = content_split[0]
+        body = content_split[1]
+        return title.strip(), body.strip()
+    except Exception as e:
+        logging.error(f"bug_report_generator.py: Error parsing response: {e}")
+
 def process_user_input(user_steps, expected_results):
 
     llm = init_llm()
@@ -56,7 +65,7 @@ Expected Results:
 {expected_results}
 
 Taking reference of the examples below, can you generate a bug report describting the issue, steps to reproduce and expected results?
-Use simple and short sentences. Use similar format and punctuations. Wrap your result in code snippet.
+Use simple and short sentences. Use similar format and punctuations.
 
 Below are some examples of bug report:
 """.format(user_steps=user_steps, expected_results=expected_results)
@@ -66,9 +75,15 @@ Below are some examples of bug report:
 
             # Generate custom bug report using LLM
             response = llm.invoke(prompt)
+            title, body = split_response(response.content)
             
-            report = f"\n*Cool Tip💡 If the result is not accurate, try to refine your input with more information.*\n\n"
-            report += response.content
+            report = f"\n*Cool Tip💡 If the result is not accurate, try to refine your input with more information.*\n"
+            report += f"\n**Issue Title:**\n```\n"
+            report += title
+            report += f"\n```\n"
+            report += f"\n**Issue Body:**\n```\n"
+            report += body
+            report += f"\n```\n"
             report += f"\nDon’t forget to include your test environment details, as well as any screenshots or screen recordings, when submitting your issue.🚀\n"
             report += """
 Below is a template for test environment information:

@@ -12,15 +12,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 template = """
 Example:
 
-**Issue Title:**
+Issue Title:
 
-```
 {title}
-```
 
-**Issue Body:**
+Issue Body:
 
-```
 ## Description:
 {description}
 
@@ -29,22 +26,19 @@ Example:
 
 ## Expected behaviour:
 {expected_results}
-```
+
 """
 
 # Define default template
 default_template = """
 Example:
 
-**Issue Title:**
+Issue Title:
 
-```
-[Login] Unexpected error when login with email
-```
+Unexpected error when login with email
 
-**Issue Body:**
+Issue Body:
 
-```
 ## Description:
 When the user tries to login with email and one-time password (OTP), it will show an unexpected error.
 
@@ -57,7 +51,6 @@ When the user tries to login with email and one-time password (OTP), it will sho
 
 ## Expected behaviour:
 Should login successfully and redirect to Home page.
-```
 
 """
 
