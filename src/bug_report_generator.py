@@ -39,9 +39,9 @@ def init_llm():
 def split_response(content):
     try:
         content_split = content.split("Issue Title:")[1].split("Issue Body:")
-        title = content_split[0]
-        body = content_split[1]
-        return title.strip(), body.strip()
+        title = content_split[0].strip("*").strip("`").strip()
+        body = content_split[1].strip("*").strip("`").strip()
+        return title, body
     except Exception as e:
         logging.error(f"bug_report_generator.py: Error parsing response: {e}")
 
