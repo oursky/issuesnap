@@ -57,6 +57,7 @@ def show_placeholder(message="Loading..."):
 	with st.container(height=160, border=True):
 		st.markdown(custom_container, unsafe_allow_html=True)
 
+
 try:
 	# Check if required API key exists
 	check_api_key()
@@ -111,7 +112,7 @@ try:
 					font-style: italic;
 					font-size: 16px;
 				}
-    
+	
 				a:link , a:visited{
 					color: inherit;
 					background-color: transparent;
@@ -136,7 +137,8 @@ try:
 		test_env = get_test_env()
 		gen_btn = st.button("Generate", type="primary",
 							use_container_width=True)
-		st.caption("[Made with Passion © OURSKY](%s)" % "https://www.oursky.com")
+		st.caption("[Made with Passion © OURSKY](%s)" %
+				   "https://www.oursky.com")
 
 	# Main view
 	st.title("IssueSnap")
@@ -148,7 +150,8 @@ try:
 			result_holder.empty()
 			show_caption_before()
 			show_placeholder("Generating...")
-			response = process_user_input(user_steps, expected_results, test_env)
+			response = process_user_input(
+				user_steps, expected_results, test_env)
 		# Show results in container
 		if response:
 			with result_holder.container():
