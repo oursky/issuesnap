@@ -11,14 +11,14 @@ def get_user_steps():
 	return st.text_area("How do you reproduce the bug? 🐞",
 						placeholder="e.g.\nClick login, fill email & OTP,  click submit, \"Failed to Login\"",
 						value="",
-						height=150)
+						height=120)
 
 
 def get_expected_results():
 	return st.text_area("What do you expect to see? 👀",
 						placeholder="e.g.\nRedirect to homepage",
 						value="",
-						height=150)
+						height=120)
 
 
 def get_test_env():
@@ -37,7 +37,7 @@ def show_caption_before():
 
 def show_caption_after():
 	caption = f"Report generated 🎉\n\n"
-	caption += f"*💡 If the result is not accurate, try to refine your input with more information.*"
+	caption += f"💡 *If the result is not accurate, try to refine your input with more information.*"
 	st.write(caption)
 
 
@@ -75,6 +75,20 @@ try:
 	st.markdown(
 		"""
 				<style>
+				code {
+					white-space: pre-wrap !important;
+				}
+
+				[data-testid="stSidebarUserContent"] {
+					padding-top: 2.5rem;
+					padding-bottom: 2.5rem;
+				}
+
+				[data-testid="stAppViewBlockContainer"] {
+					padding-top: 1.2rem;
+					padding-bottom: 2.5rem;
+				}
+	
 				.pre-generate-container {
 					height: 130px;
 					display: flex;
@@ -137,8 +151,8 @@ try:
 		test_env = get_test_env()
 		gen_btn = st.button("Generate", type="primary",
 							use_container_width=True)
-		st.caption("[Made with Passion © OURSKY](%s)" %
-				   "https://www.oursky.com")
+		st.caption("[Made with Passion © **OURSKY**](%s)" %
+				   "https://www.oursky.com/?utm_medium=web&utm_source=issuesnap")
 
 	# Main view
 	st.title("IssueSnap")
