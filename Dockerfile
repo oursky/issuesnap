@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 RUN mkdir -p /app
 WORKDIR /app
@@ -6,7 +6,8 @@ COPY . /app
 
 RUN pip3 install -r requirements.txt
 
-COPY index.html /usr/local/lib/python3.9/site-packages/streamlit/static/index.html
+COPY ./static/index.html /usr/local/lib/python3.11/site-packages/streamlit/static/index.html
+COPY ./static/favicon.png /usr/local/lib/python3.11/site-packages/streamlit/static/favicon.png
 
 EXPOSE 8501
 

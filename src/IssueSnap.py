@@ -65,7 +65,6 @@ try:
 	# Streamlit App Interface
 	st.set_page_config(
 		page_title="IssueSnap",
-		page_icon="⚡️",
 		layout="centered",
 		initial_sidebar_state="expanded",
 		menu_items=None
