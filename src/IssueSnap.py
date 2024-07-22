@@ -28,6 +28,11 @@ def get_test_env():
 						height=170,
 						help="This helps in issue replication and investigation.")
 
+def show_sidebar_header():
+	sidebar_header = """
+ 			<div class="sidebar-header">👇🏻 Tell me your bug</div>
+			"""
+	st.markdown(sidebar_header, unsafe_allow_html=True)
 
 def show_caption_before():
 	caption = f"Streamline your QA process with ease!\n\n"
@@ -87,6 +92,15 @@ try:
 					padding-top: 1.2rem;
 					padding-bottom: 2.5rem;
 				}
+    
+				.sidebar-header {
+					font-family: Source Sans Pro;
+					font-weight: 700;
+					font-size: 24px;
+					line-height: 28px;
+					padding-top: 16px;
+					padding-bottom: 16px;
+				}
 	
 				.pre-generate-container {
 					height: 130px;
@@ -95,6 +109,7 @@ try:
 					justify-content: center;
 					gap: 0.5rem;
 				}
+    
 				.pre-generate-icon {
 					display: flex;
 					width: 2rem;
@@ -107,6 +122,7 @@ try:
 					justify-content: center;
 					background-color: rgb(255, 189, 69);
 				}
+    
 				.pre-generate-icon-svg {
 					vertical-align: middle;
 					overflow: hidden;
@@ -120,6 +136,7 @@ try:
 					height: 1.25rem;
 					flex-shrink: 0;
 				}
+    
 				.pre-generate-message {
 					font-family: Source Code Pro;
 					font-style: italic;
@@ -144,7 +161,8 @@ try:
 
 	# Sidebar input view
 	with st.sidebar:
-		st.header("👇🏻 Tell me your bug")
+		# st.header("👇🏻 Tell me your bug")
+		show_sidebar_header()
 		user_steps = get_user_steps()
 		expected_results = get_expected_results()
 		test_env = get_test_env()
