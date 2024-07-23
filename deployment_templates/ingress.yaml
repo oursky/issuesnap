@@ -1,25 +1,25 @@
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: bug-reporter
+  name: issuesnap
   labels:
-    app: bug-reporter
+    app: issuesnap
   namespace: your-namespace # Change to your namespace
   annotations:
     kubernetes.io/tls-acme: 'true'
 spec:
   rules:
-    - host: bugreport.oursky.com # Change to your domain
+    - host: issuesnap.oursky.com # Change to your domain
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: bug-reporter
+                name: issuesnap
                 port:
                   number: 80
   tls:
     - hosts:
-        - bugreport.oursky.com # Change to your domain
-      secretName: bugreport-tls
+        - issuesnap.oursky.com # Change to your domain
+      secretName: issuesnap-tls

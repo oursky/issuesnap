@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/component: bug-reporter
-  name: bug-reporter
+    app.kubernetes.io/component: issuesnap
+  name: issuesnap
   namespace: your-namespace # Change to your namespace
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/component: bug-reporter
+      app.kubernetes.io/component: issuesnap
   template:
     metadata:
       labels:
-        app.kubernetes.io/component: bug-reporter
+        app.kubernetes.io/component: issuesnap
     spec:
       restartPolicy: Always
       containers:
-      - name: bug-reporter
-        image: joyzoursky/ai-bug-report-generator:latest # Select a specific image version
+      - name: issuesnap
+        image: joyzoursky/issuesnap:latest # Select a specific image version
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8501

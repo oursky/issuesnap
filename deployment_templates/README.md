@@ -33,7 +33,7 @@ kubectl apply -f ingress.yaml
 
   Example:
   ```
-  docker buildx build --platform=linux/amd64 -t joyzoursky/ai-bug-report-generator:202403310000 .
+  docker buildx build --platform=linux/amd64 -t joyzoursky/issuesnap:202403310000 .
   ```
 
 2. Login to Docker and Push the image with new version tag
@@ -41,7 +41,7 @@ kubectl apply -f ingress.yaml
   Example:
   ```
   docker login
-  docker push joyzoursky/ai-bug-report-generator:202403310000
+  docker push joyzoursky/issuesnap:202403310000
   ```
 
 3. Update the version in deployment.yaml and re-deploy the pod(s)
