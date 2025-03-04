@@ -26,7 +26,7 @@ def init_llm():
 		google_api_key = os.getenv("GOOGLE_API_KEY")
 		# Initialize LLM model
 		llm = ChatGoogleGenerativeAI(
-			model="gemini-pro",
+			model="gemini-2.0-flash",
 			safety_settings={
 				HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
 				HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
